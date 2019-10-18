@@ -6,17 +6,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    private Controls input;
-
-    private void Start()
+    private Vector2 movement;
+    //Called by unity (sendMessage)
+    private void OnMovement(InputValue value)
     {
-        input = new Controls();
-        input.Enable();
+        movement = value.Get<Vector2>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        print(input.Character.Movement.ReadValue<Vector2>());
+        transform.Translate(movement * Time.deltaTime);
     }
 }
